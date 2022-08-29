@@ -15,33 +15,180 @@ const inventoryList = new Map([
             sodium:0,
         }
     }],
-    ["B1","Coke"],
-    ["C1","Coke"],
-    ["D1","Coke"],
+    ["B1",{
+        name: "Chip",
+        price:3.5,
+        amount:6,
+        nv:{
+            calories:10,
+            sugar:5,
+            carb:0,
+            sodium:0,
+        }
+    }],
+    ["C1",{
+        name: "Donut",
+        price:3.5,
+        amount:6,
+        nv:{
+            calories:10,
+            sugar:5,
+            carb:0,
+            sodium:0,
+        }
+    }],
+    ["D1",{
+        name: "Monster",
+        price:3.5,
+        amount:6,
+        nv:{
+            calories:10,
+            sugar:5,
+            carb:0,
+            sodium:0,
+        }
+    }],
 
-    ["A2","Milk"],
-    ["B2","Milk"],
-    ["C2","Milk"],
-    ["D2","Milk"],
+    ["A2",{
+        name: "Milk",
+        price:3.5,
+        amount:6,
+        nv:{
+            calories:10,
+            sugar:5,
+            carb:0,
+            sodium:0,
+        }
+    }],
+    ["B2",{
+        name: "Chocolate Milk",
+        price:3.5,
+        amount:6,
+        nv:{
+            calories:10,
+            sugar:5,
+            carb:0,
+            sodium:0,
+        }
+    }],
+    ["C2",{
+        name: "Timibits",
+        price:3.5,
+        amount:6,
+        nv:{
+            calories:10,
+            sugar:5,
+            carb:0,
+            sodium:0,
+        }
+    }],
+    ["D2",{
+        name: "Coke",
+        price:3.5,
+        amount:6,
+        nv:{
+            calories:10,
+            sugar:5,
+            carb:0,
+            sodium:0,
+        }
+    }],
 
-    ["A3","Candy"],
-    ["B3","Candy"],
-    ["C3","Candy"],
-    ["D3","Candy"],
+    ["A3",{
+        name: "Coke",
+        price:3.5,
+        amount:6,
+        nv:{
+            calories:10,
+            sugar:5,
+            carb:0,
+            sodium:0,
+        }
+    }],
+    ["B3",{
+        name: "Coke",
+        price:3.5,
+        amount:6,
+        nv:{
+            calories:10,
+            sugar:5,
+            carb:0,
+            sodium:0,
+        }
+    }],
+    ["C3",{
+        name: "Coke",
+        price:3.5,
+        amount:6,
+        nv:{
+            calories:10,
+            sugar:5,
+            carb:0,
+            sodium:0,
+        }
+    }],
+    ["D3",{
+        name: "Candy",
+        price:3.5,
+        amount:6,
+        nv:{
+            calories:10,
+            sugar:5,
+            carb:0,
+            sodium:0,
+        }
+    }],
 
-    ["A4","Protein Bar"],
-    ["B4","Protein Bar"],
-    ["C4","Protein Bar"],
-    ["D4","Protein Bar"],
+    ["A4",{
+        name: "Protein bar",
+        price:3.5,
+        amount:6,
+        nv:{
+            calories:10,
+            sugar:5,
+            carb:0,
+            sodium:0,
+        }
+    }],
+    ["B4",{
+        name: "Coke",
+        price:3.5,
+        amount:6,
+        nv:{
+            calories:10,
+            sugar:5,
+            carb:0,
+            sodium:0,
+        }
+    }],
+    ["C4",{
+        name: "Coke",
+        price:3.5,
+        amount:6,
+        nv:{
+            calories:10,
+            sugar:5,
+            carb:0,
+            sodium:0,
+        }
+    }],
+    ["D4",{
+        name: "Coke",
+        price:3.5,
+        amount:6,
+        nv:{
+            calories:10,
+            sugar:5,
+            carb:0,
+            sodium:0,
+        }
+    }],
 ]);
 
 for (const key of slotKeys){
     const slotKey = key.textContent;
     key.addEventListener("click",function(){
-        // console.log(key.textContent, inventoryList.get(slotKey));
-        infoElement.textContent = inventoryList.get(slotKey).name ? inventoryList.get(slotKey).name : inventoryList.get(slotKey)
-        // console.log(inventoryList.get(slotKey).name);
-        
+        infoElement.textContent = inventoryList.get(slotKey)?.name
     })
 }
 

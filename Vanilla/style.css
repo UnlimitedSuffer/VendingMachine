@@ -48,3 +48,27 @@ body {
     align-items: center;
     background-color: #e17474;
 }
+
+.nutrition-values .title {
+    padding: 26px;
+    text-align: left;
+    font-weight: bold;
+    font-size:40px;
+    border-bottom: 4px solid black;
+}
+
+.nutrition-values .facts .row {
+    font-size:30px;
+    border-bottom: 2px solid black;
+}
+
+.row span:nth-child(2) {
+    text-align: right;
+    float: right;
+}
+
+.facts {
+    display:flex;
+    flex-direction: column;
+    align-: ;
+}
