@@ -229,13 +229,14 @@ function handle(itemPrice,billInsert){
     const isPostive = balance > 0;
 
     if(!isFinite(itemPrice) || !isFinite(billInsert))
-        return console.log("Please Enter a valid number!")
+    //    return alert();    
+    return alert("Please Enter a valid number!","error")
 
     if (isPostive) 
         // item quantity --;
-        return console.log("Purchase successfull","Here is your change: ",balance);
+        return alert(`Purchase successfull Here is your change: ${balance}`,"success");
     else
-        return console.log("Insuffcient fund!","Please insert enough money, this much: " ,-balance)
+        return alert(`Insuffcient fund!`, "warning",`Please insert enough money, this much:  ${-balance}`);
 }
 
 // Pure function -  no side effects 
@@ -258,3 +259,24 @@ function calculate(itemPrice,billInsert){
 
 // else
 //     alert(insfuccient funds, balance)
+
+function alert(title,status, message){
+    toastr.options = {
+        "closeButton": true,
+        "debug": false,
+        "newestOnTop": false,
+        "progressBar": false,
+        "positionClass": "toast-top-left",
+        "preventDuplicates": false,
+        "onclick": null,
+        "showDuration": "300",
+        "hideDuration": "1000",
+        "timeOut": "5000",
+        "extendedTimeOut": "1000",
+        "showEasing": "swing",
+        "hideEasing": "linear",
+        "showMethod": "fadeIn",
+        "hideMethod": "fadeOut"
+        }
+        toastr[status](message, title)
+}

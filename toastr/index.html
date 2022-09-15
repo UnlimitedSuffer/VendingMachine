@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alert</title>
+    <link href="toastr.min.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+    <button type="button" id="button">Click Alert</button>
+    <script src="jquery-3.3.1.min.js"></script>
+    <script src="toastr.min.js"></script>
+    <script>
+        $('#button').on("click",function(){
+            toastr.options = {
+            "closeButton": true,
+            "debug": false,
+            "newestOnTop": false,
+            "progressBar": false,
+            "positionClass": "toast-top-left",
+            "preventDuplicates": false,
+            "onclick": null,
+            "showDuration": "300",
+            "hideDuration": "1000",
+            "timeOut": "5000",
+            "extendedTimeOut": "1000",
+            "showEasing": "swing",
+            "hideEasing": "linear",
+            "showMethod": "fadeIn",
+            "hideMethod": "fadeOut"
+            }
+            toastr["success"]("123!", "Success")
+        })
+    </script>
+</body>
+</html>
