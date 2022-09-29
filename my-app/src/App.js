@@ -2,6 +2,9 @@ import React, {useState} from 'react';
 import logo from './logo.svg';
 import './App.css';
 import Home, {Away} from "./Home";
+import Button from './components/Button';
+import Nutriton from './components/Nutrition';
+
 
 function App() {
     const [inventoryList, updateInventoryList] = useState(new Map([
@@ -185,73 +188,20 @@ function App() {
             }
         }],
     ]));
-    console.log({inventoryList,updateInventoryList, amount: inventoryList.get('A1')});
-    let myOtherNumber = 0;
-    setTimeout(function(){
-        inventoryList.set('A1', {
-            name: "Coke",
-            price:4.5,
-            amount:3,
-            nv:{
-                calories:10,
-                sugar:5,
-                carb:2,
-                sodium:13,
-            }
-        })
-        updateInventoryList(inventoryList);
-        console.log({inventoryList,updateInventoryList, amount: inventoryList.get('A1')});
-    }, 3000)
   return <>
-  {JSON.stringify(inventoryList.get('A1'))}
   <div class="wrapper">
-        <div class="nutrition-values">
-            <div class="title"> Nutrition Values</div>
-            <div class="facts">
-                <div class="row">
-                     <span>Amt/Serving</span>
-                     <span>% of daily</span>
-                </div>
-                <div class="row calories">
-                    <span>Calories</span>
-                    <span> %</span>
-               </div>
-               <div class="row sugar">
-                <span>Sugar</span>
-                <span>%</span>
-               </div>
-               <div class="row sodium">
-                <span>Sodium</span>
-                <span>%</span>
-               </div>
-               <div class="row carbs">
-                <span>Carbohydrates</span>
-                <span>%</span>
-               </div>
-                
-            </div>
-        </div>
+        <Nutriton />
         <div class="keypad">
             <div class="info">
                 Name of snack
             </div>
             <div class="slot-keys">
-                <span>A1</span>
-                <span>B1</span>
-                <span>C1</span>
-                <span>D1</span>
-                <span>A2</span>
-                <span>B2</span>
-                <span>C2</span>
-                <span>D2</span>
-                <span>A3</span>
-                <span>B3</span>
-                <span>C3</span>
-                <span>D3</span>
-                <span>A4</span>
-                <span>B4</span>
-                <span>C4</span>
-                <span>D4</span>
+                {/* <Button>A1</Button> */}
+                {[...inventoryList.entries()].map(function(object, index){
+                   console.log({object,index})
+                   const [key,value] = object; 
+                   return <Button onClick={function(){console.log(`Clicked ${key}`)}} key={key}>{key}</Button>
+                })}
             </div>
             <div class="input">
                 <span> Insert Cash</span>
