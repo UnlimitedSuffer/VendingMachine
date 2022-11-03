@@ -1,5 +1,5 @@
 function Button(props) {
-    console.log({props})
+    // console.log({props})
     return (
         <span onClick={props.onClick} className={props.val}>{props.children}</span>
     )

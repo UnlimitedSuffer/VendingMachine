@@ -1,25 +1,25 @@
-function Nutriton() {
+function Nutriton(props) {
     return (
-        <div class="nutrition-values">
-            <div class="title"> Nutrition Values</div>
-            <div class="facts">
-                <div class="row">
+        <div className="nutrition-values">
+            <div className="title"> Nutrition Values</div>
+            <div className="facts">
+                <div className="row">
                     <span>Amt/Serving</span>
                     <span>% of daily</span>
                 </div>
-                <div class="row calories">
+                <div className="row calories">
                     <span>Calories</span>
                     <span> %</span>
                 </div>
-                <div class="row sugar">
+                <div className="row sugar">
                     <span>Sugar</span>
                     <span>%</span>
                 </div>
-                <div class="row sodium">
+                <div className="row sodium">
                     <span>Sodium</span>
                     <span>%</span>
                 </div>
-                <div class="row carbs">
+                <div className="row carbs">
                     <span>Carbohydrates</span>
                     <span>%</span>
                 </div>

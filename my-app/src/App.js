@@ -188,24 +188,59 @@ function App() {
             }
         }],
     ]));
+
+    const [inputValue, updateInputValue] = useState(0);
+
+    function checkBalance(event){
+        const cash = Number(event.target.value);
+        console.log(event.target.value, typeof(cash))
+        updateInputValue(cash);
+    }
+    
+    function purchaseOrShowProduct(itemPrice){
+        // console.log(`Clicked ${key}`)
+        // check if theres any cash in it 
+        // if no show product info
+        // if yes make a purchase
+        handle(itemPrice,inputValue)
+    }
+
+    function handle(itemPrice,inputValue){
+        // console.log(itemPrice,inputValue);
+        // console.log(inputValue == NaN ,itemPrice == NaN)
+        
+        const balance = calculate(itemPrice,inputValue);
+        const isPostive = balance > 0;
+    
+        if(!isFinite(itemPrice) || !isFinite(inputValue))
+        //    return alert();    
+        return console.log("Please Enter a valid number!","error")
+    
+        if (isPostive) 
+            // item quantity --;
+            return console.log(`Purchase successfull Here is your change: ${balance}`,"success");
+        else
+            return console.log(`Insuffcient fund!`, "warning",`Please insert enough money, this much:  ${-balance}`);
+    }
+    
   return <>
-  <div class="wrapper">
+  <div className="wrapper">
         <Nutriton />
-        <div class="keypad">
-            <div class="info">
+        <div className="keypad">
+            <div className="info">
                 Name of snack
             </div>
-            <div class="slot-keys">
+            <div className="slot-keys">
                 {/* <Button>A1</Button> */}
                 {[...inventoryList.entries()].map(function(object, index){
-                   console.log({object,index})
+                   // console.log({object,index})
                    const [key,value] = object; 
-                   return <Button onClick={function(){console.log(`Clicked ${key}`)}} key={key}>{key}</Button>
+                   return <Button onClick={(event) => purchaseOrShowProduct(value.price)} key={key}>{key}</Button>
                 })}
             </div>
-            <div class="input">
+            <div className="input">
                 <span> Insert Cash</span>
-                <input placeholder="$ 10.95" type="number"/>
+                <input placeholder="$ 10.95" type="number" onChange={checkBalance}/>
             </div>
         </div>
     </div>
@@ -214,3 +249,17 @@ function App() {
 
 
 export default App;
+
+function calculate(itemPrice,billInsert){
+    return billInsert-itemPrice;
+}
+
+
+function isFinite(num) { // NaN
+    // number is both less than 
+    return !(num > 0 == false && num < 0 == false)
+}
+
+// function alert(title,status, message){
+//     toastr[status](message, title)
+// }
