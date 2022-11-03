@@ -5,6 +5,24 @@ import Home, {Away} from "./Home";
 import Button from './components/Button';
 import Nutriton from './components/Nutrition';
 
+// console.log(window.toastr);
+window.toastr.options = {
+    "closeButton": true,
+    "debug": false,
+    "newestOnTop": false,
+    "progressBar": false,
+    "positionClass": "toast-top-left",
+    "preventDuplicates": false,
+    "onclick": null,
+    "showDuration": "300",
+    "hideDuration": "1000",
+    "timeOut": "5000",
+    "extendedTimeOut": "1000",
+    "showEasing": "swing",
+    "hideEasing": "linear",
+    "showMethod": "fadeIn",
+    "hideMethod": "fadeOut"
+}
 
 function App() {
     const [inventoryList, updateInventoryList] = useState(new Map([
@@ -189,12 +207,12 @@ function App() {
         }],
     ]));
 
-    const [inputValue, updateInputValue] = useState(0);
+    const [inputValue, updateInputValue] = useState();
 
     function checkBalance(event){
         const cash = Number(event.target.value);
-        console.log(event.target.value, typeof(cash))
-        updateInputValue(cash);
+        if (!cash) { return updateInputValue(''); }
+        updateInputValue(event.target.value);
     }
     
     function purchaseOrShowProduct(itemPrice){
@@ -203,6 +221,7 @@ function App() {
         // if no show product info
         // if yes make a purchase
         handle(itemPrice,inputValue)
+
     }
 
     function handle(itemPrice,inputValue){
@@ -210,17 +229,22 @@ function App() {
         // console.log(inputValue == NaN ,itemPrice == NaN)
         
         const balance = calculate(itemPrice,inputValue);
-        const isPostive = balance > 0;
+
+        // >=0 bug 
+        const isPostive = balance >= 0;
     
         if(!isFinite(itemPrice) || !isFinite(inputValue))
-        //    return alert();    
-        return console.log("Please Enter a valid number!","error")
+        //    return popup();    
+        return popup("Please Enter a valid number!","error")
     
-        if (isPostive) 
+        if (isPostive) {
             // item quantity --;
-            return console.log(`Purchase successfull Here is your change: ${balance}`,"success");
-        else
-            return console.log(`Insuffcient fund!`, "warning",`Please insert enough money, this much:  ${-balance}`);
+            // inputvalue = balance 
+            updateInputValue(String(balance));
+            return popup(`Purchase successfull Here is your change: ${balance}`,"success");
+        }else
+            return popup(`Insuffcient fund!`, "warning",`Please insert enough money, this much:  ${-balance}`);
+        
     }
     
   return <>
@@ -240,7 +264,7 @@ function App() {
             </div>
             <div className="input">
                 <span> Insert Cash</span>
-                <input placeholder="$ 10.95" type="number" onChange={checkBalance}/>
+                <input placeholder="$ 10.95" type="text" value={inputValue} onChange={checkBalance}/>
             </div>
         </div>
     </div>
@@ -260,6 +284,7 @@ function isFinite(num) { // NaN
     return !(num > 0 == false && num < 0 == false)
 }
 
-// function alert(title,status, message){
-//     toastr[status](message, title)
-// }
+function popup(title,status, message){
+    window.toastr[status](message, title)
+
+}
