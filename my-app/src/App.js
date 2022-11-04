@@ -209,19 +209,24 @@ function App() {
 
     const [inputValue, updateInputValue] = useState();
 
+    const [nvShowing, updateNvShowing] = useState({});
+
+    const [nameShowing, updateNameShowing] = useState("");
+
     function checkBalance(event){
         const cash = Number(event.target.value);
         if (!cash) { return updateInputValue(''); }
         updateInputValue(event.target.value);
     }
     
-    function purchaseOrShowProduct(itemPrice){
+    function purchaseOrShowProduct(value){
         // console.log(`Clicked ${key}`)
         // check if theres any cash in it 
         // if no show product info
         // if yes make a purchase
-        handle(itemPrice,inputValue)
-
+        updateNvShowing(value.nv);
+        updateNameShowing(value.name);
+        handle(value.price,inputValue)
     }
 
     function handle(itemPrice,inputValue){
@@ -233,33 +238,42 @@ function App() {
         // >=0 bug 
         const isPostive = balance >= 0;
     
-        if(!isFinite(itemPrice) || !isFinite(inputValue))
+        if(!isFinite(itemPrice) || !isFinite(inputValue)){
         //    return popup();    
         return popup("Please Enter a valid number!","error")
-    
+        }
         if (isPostive) {
             // item quantity --;
             // inputvalue = balance 
             updateInputValue(String(balance));
+            updateNvShowing({});
             return popup(`Purchase successfull Here is your change: ${balance}`,"success");
         }else
+            updateNvShowing({});
             return popup(`Insuffcient fund!`, "warning",`Please insert enough money, this much:  ${-balance}`);
         
     }
     
   return <>
   <div className="wrapper">
-        <Nutriton />
+        <Nutriton 
+            calories={nvShowing.calories}
+            sugar={nvShowing.sugar}
+            sodium={nvShowing.sodium}
+            carbs={nvShowing.carb}/>
         <div className="keypad">
             <div className="info">
-                Name of snack
+                {
+                    nameShowing || "Name of snack"
+                } 
             </div>
             <div className="slot-keys">
                 {/* <Button>A1</Button> */}
                 {[...inventoryList.entries()].map(function(object, index){
                    // console.log({object,index})
                    const [key,value] = object; 
-                   return <Button onClick={(event) => purchaseOrShowProduct(value.price)} key={key}>{key}</Button>
+                   
+                   return <Button onClick={(event) => purchaseOrShowProduct(value)} key={key}>{key}</Button>
                 })}
             </div>
             <div className="input">
@@ -288,3 +302,9 @@ function popup(title,status, message){
     window.toastr[status](message, title)
 
 }
+
+// property and actions
+
+// get nutrition value 
+
+// display nutrition value 
