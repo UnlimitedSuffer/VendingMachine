@@ -207,7 +207,7 @@ function App() {
         }],
     ]));
 
-    const [inputValue, updateInputValue] = useState();
+    const [inputValue, updateInputValue] = useState("");
 
     const [nvShowing, updateNvShowing] = useState({});
 
@@ -219,17 +219,18 @@ function App() {
         updateInputValue(event.target.value);
     }
     
-    function purchaseOrShowProduct(value){
+    function purchaseOrShowProduct(value, key){
         // console.log(`Clicked ${key}`)
         // check if theres any cash in it 
         // if no show product info
         // if yes make a purchase
         updateNvShowing(value.nv);
         updateNameShowing(value.name);
-        handle(value.price,inputValue)
+        handle(value,inputValue, key)
     }
 
-    function handle(itemPrice,inputValue){
+    function handle(value,inputValue, key){
+        const itemPrice = value.price;
         // console.log(itemPrice,inputValue);
         // console.log(inputValue == NaN ,itemPrice == NaN)
         
@@ -247,6 +248,16 @@ function App() {
             // inputvalue = balance 
             updateInputValue(String(balance));
             updateNvShowing({});
+            // 
+            if(value.amount>0){
+                value.amount--;
+            }else if(value.amount == 0) {
+                return popup(`Sorry!`,"warning",`We are out of stock for selected item!`)
+            }
+            
+            const newMap = inventoryList.set(key, value)
+            updateInventoryList(newMap)
+            console.log(inventoryList);
             return popup(`Purchase successfull Here is your change: ${balance}`,"success");
         }else
             updateNvShowing({});
@@ -272,8 +283,8 @@ function App() {
                 {[...inventoryList.entries()].map(function(object, index){
                    // console.log({object,index})
                    const [key,value] = object; 
-                   
-                   return <Button onClick={(event) => purchaseOrShowProduct(value)} key={key}>{key}</Button>
+
+                   return <Button onClick={(event) => purchaseOrShowProduct(value, key)} key={key}>{key}</Button>
                 })}
             </div>
             <div className="input">
