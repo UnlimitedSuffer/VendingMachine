@@ -1,9 +1,10 @@
-import React, {useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import Home, {Away} from "./Home";
+import Home, { Away } from "./Home";
 import Button from './components/Button';
 import Nutriton from './components/Nutrition';
+// import fetch from 'node-fetch';
 
 // console.log(window.toastr);
 window.toastr.options = {
@@ -25,187 +26,26 @@ window.toastr.options = {
 }
 
 function App() {
-    const [inventoryList, updateInventoryList] = useState(new Map([
-        ["A1",{
-            name: "Coke",
-            price:3.5,
-            amount:6,
-            nv:{
-                calories:10,
-                sugar:5,
-                carb:2,
-                sodium:13,
-            }
-        }],
-        ["B1",{
-            name: "Chip",
-            price:4.5,
-            amount:6,
-            nv:{
-                calories:7,
-                sugar:4,
-                carb:8,
-                sodium:2,
-            }
-        }],
-        ["C1",{
-            name: "Donut",
-            price:5.5,
-            amount:6,
-            nv:{
-                calories:28,
-                sugar:1,
-                carb:9,
-                sodium:5,
-            }
-        }],
-        ["D1",{
-            name: "Monster",
-            price:6.5,
-            amount:6,
-            nv:{
-                calories:38,
-                sugar:7,
-                carb:6,
-                sodium:3,
-            }
-        }],
-    
-        ["A2",{
-            name: "Milk",
-            price:1.5,
-            amount:6,
-            nv:{
-                calories:10,
-                sugar:5,
-                carb:0,
-                sodium:0,
-            }
-        }],
-        ["B2",{
-            name: "Chocolate Milk",
-            price:4,
-            amount:6,
-            nv:{
-                calories:110,
-                sugar:21,
-                carb:62,
-                sodium:11,
-            }
-        }],
-        ["C2",{
-            name: "Timibits",
-            price:1,
-            amount:6,
-            nv:{
-                calories:10,
-                sugar:5,
-                carb:3,
-                sodium:2.5,
-            }
-        }],
-        ["D2",{
-            name: "Sprite",
-            price:3,
-            amount:6,
-            nv:{
-                calories:210,
-                sugar:54,
-                carb:20,
-                sodium:10,
-            }
-        }],
-    
-        ["A3",{
-            name: "Fanta",
-            price:4,
-            amount:6,
-            nv:{
-                calories:140,
-                sugar:18,
-                carb:9,
-                sodium:7,
-            }
-        }],
-        ["B3",{
-            name: "Pepsi",
-            price:6,
-            amount:6,
-            nv:{
-                calories:130,
-                sugar:5,
-                carb:8,
-                sodium:7,
-            }
-        }],
-        ["C3",{
-            name: "Skittles",
-            price:3.9,
-            amount:6,
-            nv:{
-                calories:16,
-                sugar:15,
-                carb:17,
-                sodium:18,
-            }
-        }],
-        ["D3",{
-            name: "Candy",
-            price:1.5,
-            amount:6,
-            nv:{
-                calories:14,
-                sugar:25,
-                carb:20,
-                sodium:20,
-            }
-        }],
-    
-        ["A4",{
-            name: "Protein bar",
-            price:5.5,
-            amount:6,
-            nv:{
-                calories:290,
-                sugar:13,
-                carb:19,
-                sodium:20,
-            }
-        }],
-        ["B4",{
-            name: "Coffee",
-            price:1,
-            amount:6,
-            nv:{
-                calories:0,
-                sugar:0,
-                carb:0,
-                sodium:0,
-            }
-        }],
-        ["C4",{
-            name: "Bubble Tea",
-            price:3.6,
-            amount:6,
-            nv:{
-                calories:18,
-                sugar:17,
-                carb:98,
-                sodium:99,
-            }
-        }],
-        ["D4",{
-            name: "Apple Pie",
-            price:6.7,
-            amount:6,
-            nv:{
-                calories:37,
-                sugar:45,
-                carb:99,
-                sodium:36,
-            }
-        }],
-    ]));
+
+
+    const [inventoryList, updateInventoryList] = useState(new Map([]));
+
+    useEffect(
+        () => {
+            fetch('http://localhost:3000/inventoryList').then((response) => {
+                const jsonData = response.json();
+                jsonData.then(inventoryList => {
+                    // console.log(inventoryList)
+                    const theMap = Object.keys(inventoryList).map(key => {
+                        return [inventoryList[key].id, inventoryList[key][inventoryList[key].id]]
+                    })
+                    console.log(theMap);
+                    updateInventoryList(new Map(theMap))
+                });
+            })
+        }, []
+    )
+
 
     const [inputValue, updateInputValue] = useState("");
 
@@ -213,35 +53,37 @@ function App() {
 
     const [nameShowing, updateNameShowing] = useState("");
 
-    function checkBalance(event){
+    const [] = useState();
+
+    function checkBalance(event) {
         const cash = Number(event.target.value);
         if (!cash) { return updateInputValue(''); }
         updateInputValue(event.target.value);
     }
-    
-    function purchaseOrShowProduct(value, key){
+
+    function purchaseOrShowProduct(value, key) {
         // console.log(`Clicked ${key}`)
         // check if theres any cash in it 
         // if no show product info
         // if yes make a purchase
         updateNvShowing(value.nv);
         updateNameShowing(value.name);
-        handle(value,inputValue, key)
+        handle(value, inputValue, key)
     }
 
-    function handle(value,inputValue, key){
+    function handle(value, inputValue, key) {
         const itemPrice = value.price;
         // console.log(itemPrice,inputValue);
         // console.log(inputValue == NaN ,itemPrice == NaN)
-        
-        const balance = calculate(itemPrice,inputValue);
+
+        const balance = calculate(itemPrice, inputValue);
 
         // >=0 bug 
         const isPostive = balance >= 0;
-    
-        if(!isFinite(itemPrice) || !isFinite(inputValue)){
-        //    return popup();    
-        return popup("Please Enter a valid number!","error")
+
+        if (!isFinite(itemPrice) || !isFinite(inputValue)) {
+            //    return popup();    
+            return popup("Please Enter a valid number!", "error")
         }
         if (isPostive) {
             // item quantity --;
@@ -249,58 +91,59 @@ function App() {
             updateInputValue(String(balance));
             updateNvShowing({});
             // 
-            if(value.amount>0){
+            if (value.amount > 0) {
                 value.amount--;
-            }else if(value.amount == 0) {
-                return popup(`Sorry!`,"warning",`We are out of stock for selected item!`)
+            } else if (value.amount == 0) {
+                return popup(`Sorry!`, "warning", `We are out of stock for selected item!`)
             }
-            
+
             const newMap = inventoryList.set(key, value)
             updateInventoryList(newMap)
             console.log(inventoryList);
-            return popup(`Purchase successfull Here is your change: ${balance}`,"success");
-        }else
+            // Here is where we update the server
+            return popup(`Purchase successfull Here is your change: ${balance}`, "success");
+        } else
             updateNvShowing({});
-            return popup(`Insuffcient fund!`, "warning",`Please insert enough money, this much:  ${-balance}`);
-        
-    }
-    
-  return <>
-  <div className="wrapper">
-        <Nutriton 
-            calories={nvShowing.calories}
-            sugar={nvShowing.sugar}
-            sodium={nvShowing.sodium}
-            carbs={nvShowing.carb}/>
-        <div className="keypad">
-            <div className="info">
-                {
-                    nameShowing || "Name of snack"
-                } 
-            </div>
-            <div className="slot-keys">
-                {/* <Button>A1</Button> */}
-                {[...inventoryList.entries()].map(function(object, index){
-                   // console.log({object,index})
-                   const [key,value] = object; 
+        return popup(`Insuffcient fund!`, "warning", `Please insert enough money, this much:  ${-balance}`);
 
-                   return <Button onClick={(event) => purchaseOrShowProduct(value, key)} key={key}>{key}</Button>
-                })}
-            </div>
-            <div className="input">
-                <span> Insert Cash</span>
-                <input placeholder="$ 10.95" type="text" value={inputValue} onChange={checkBalance}/>
+    }
+
+    return <>
+        <div className="wrapper">
+            <Nutriton
+                calories={nvShowing.calories}
+                sugar={nvShowing.sugar}
+                sodium={nvShowing.sodium}
+                carbs={nvShowing.carb} />
+            <div className="keypad">
+                <div className="info">
+                    {
+                        nameShowing || "Name of snack"
+                    }
+                </div>
+                <div className="slot-keys">
+                    {/* <Button>A1</Button> */}
+                    {[...inventoryList.entries()].map(function (object, index) {
+                        // console.log({object,index})
+                        const [key, value] = object;
+
+                        return <Button onClick={(event) => purchaseOrShowProduct(value, key)} key={key}>{key}</Button>
+                    })}
+                </div>
+                <div className="input">
+                    <span> Insert Cash</span>
+                    <input placeholder="$ 10.95" type="text" value={inputValue} onChange={checkBalance} />
+                </div>
             </div>
         </div>
-    </div>
-  </>;
+    </>;
 }
 
 
 export default App;
 
-function calculate(itemPrice,billInsert){
-    return billInsert-itemPrice;
+function calculate(itemPrice, billInsert) {
+    return billInsert - itemPrice;
 }
 
 
@@ -309,13 +152,13 @@ function isFinite(num) { // NaN
     return !(num > 0 == false && num < 0 == false)
 }
 
-function popup(title,status, message){
+function popup(title, status, message) {
     window.toastr[status](message, title)
 
 }
 
 // property and actions
 
-// get nutrition value 
+// get nutrition value
 
 // display nutrition value 

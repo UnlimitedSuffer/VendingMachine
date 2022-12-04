@@ -1,0 +1,228 @@
+{
+  "inventoryList": [
+    {
+      "id": "A1",
+      "A1": {
+        "name": "Coke",
+        "price": 3.5,
+        "amount": 6,
+        "nv": {
+          "calories": 10,
+          "sugar": 5,
+          "carb": 2,
+          "sodium": 13
+        }
+      }
+    },
+    {
+      "id": "B1",
+      "B1": {
+        "name": "Chip",
+        "price": 4.5,
+        "amount": 6,
+        "nv": {
+          "calories": 7,
+          "sugar": 4,
+          "carb": 8,
+          "sodium": 2
+        }
+      }
+    },
+    {
+      "id": "C1",
+      "C1": {
+        "name": "Donut",
+        "price": 5.5,
+        "amount": 6,
+        "nv": {
+          "calories": 28,
+          "sugar": 1,
+          "carb": 9,
+          "sodium": 5
+        }
+      }
+    },
+    {
+      "id": "D1",
+      "D1": {
+        "name": "Monster",
+        "price": 6.5,
+        "amount": 6,
+        "nv": {
+          "calories": 38,
+          "sugar": 7,
+          "carb": 6,
+          "sodium": 3
+        }
+      }
+    },
+    {
+      "id": "A2",
+      "A2": {
+        "name": "Milk",
+        "price": 1.5,
+        "amount": 6,
+        "nv": {
+          "calories": 10,
+          "sugar": 5,
+          "carb": 0,
+          "sodium": 0
+        }
+      }
+    },
+    {
+      "id": "B2",
+      "B2": {
+        "name": "Chocolate Milk",
+        "price": 4,
+        "amount": 6,
+        "nv": {
+          "calories": 110,
+          "sugar": 21,
+          "carb": 62,
+          "sodium": 11
+        }
+      }
+    },
+    {
+      "id": "C2",
+      "C2": {
+        "name": "Timibits",
+        "price": 1,
+        "amount": 6,
+        "nv": {
+          "calories": 10,
+          "sugar": 5,
+          "carb": 3,
+          "sodium": 2
+        }
+      }
+    },
+    {
+      "id": "D2",
+      "D2": {
+        "name": "Sprite",
+        "price": 3,
+        "amount": 6,
+        "nv": {
+          "calories": 210,
+          "sugar": 54,
+          "carb": 20,
+          "sodium": 10
+        }
+      }
+    },
+    {
+      "id": "A3",
+      "A3": {
+        "name": "Fanta",
+        "price": 4,
+        "amount": 6,
+        "nv": {
+          "calories": 140,
+          "sugar": 18,
+          "carb": 9,
+          "sodium": 7
+        }
+      }
+    },
+    {
+      "id": "B3",
+      "B3": {
+        "name": "Pepsi",
+        "price": 6,
+        "amount": 6,
+        "nv": {
+          "calories": 130,
+          "sugar": 5,
+          "carb": 8,
+          "sodium": 7
+        }
+      }
+    },
+    {
+      "id": "C3",
+      "C3": {
+        "name": "Skittles",
+        "price": 3.9,
+        "amount": 6,
+        "nv": {
+          "calories": 16,
+          "sugar": 15,
+          "carb": 17,
+          "sodium": 18
+        }
+      }
+    },
+    {
+      "id": "D3",
+      "D3": {
+        "name": "Candy",
+        "price": 1.5,
+        "amount": 6,
+        "nv": {
+          "calories": 14,
+          "sugar": 25,
+          "carb": 20,
+          "sodium": 20
+        }
+      }
+    },
+    {
+      "id": "A4",
+      "A4": {
+        "name": "Protein bar",
+        "price": 5.5,
+        "amount": 6,
+        "nv": {
+          "calories": 290,
+          "sugar": 13,
+          "carb": 19,
+          "sodium": 20
+        }
+      }
+    },
+    {
+      "id": "B4",
+      "B4": {
+        "name": "Coffee",
+        "price": 1,
+        "amount": 6,
+        "nv": {
+          "calories": 0,
+          "sugar": 0,
+          "carb": 0,
+          "sodium": 0
+        }
+      }
+    },
+    {
+      "id": "C4",
+      "C4": {
+        "name": "Bubble Tea",
+        "price": 3.6,
+        "amount": 6,
+        "nv": {
+          "calories": 18,
+          "sugar": 17,
+          "carb": 98,
+          "sodium": 99
+        }
+      }
+    },
+    {
+      "id": "D4",
+      "D4": {
+        "name": "Apple Pie",
+        "price": 6.7,
+        "amount": 6,
+        "nv": {
+          "calories": 37,
+          "sugar": 45,
+          "carb": 99,
+          "sodium": 36
+        }
+      }
+    }
+  ]
+}
